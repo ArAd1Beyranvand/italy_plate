@@ -1,7 +1,7 @@
 name: italy_plate
 description: "Italy's licence plates for the plate_core library: the EU-band car plate, the two-line plate and the motorcycle plate, black on white, with an advisory validator."
 version: 0.1.0
-publish_to: none
+repository: https://github.com/ArAd1Beyranvand/italy_plate
 resolution: workspace
 
 environment:
