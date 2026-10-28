@@ -11,7 +11,15 @@ import 'italy_missions.dart';
 /// One field: [count] characters whose first is centred on [cx], at [pitch],
 /// in a box [top]..[top]+[height] tall.
 class _Run {
-  const _Run(this.key, this.alphabet, this.count, this.cx, this.pitch, this.top, this.height);
+  const _Run(
+    this.key,
+    this.alphabet,
+    this.count,
+    this.cx,
+    this.pitch,
+    this.top,
+    this.height,
+  );
 
   final String key;
   final PlateAlphabet alphabet;
@@ -179,7 +187,11 @@ abstract final class ItalyPlates {
   static final PlateSpec unitedNations = _diplomatic('it.un', 'UN', 3);
 
   /// `UNP 147 AA`: United Nations, specialists.
-  static final PlateSpec unitedNationsSpecialists = _diplomatic('it.unp', 'UNP', 3);
+  static final PlateSpec unitedNationsSpecialists = _diplomatic(
+    'it.unp',
+    'UNP',
+    3,
+  );
 
   /// `UNT 000 AA`: United Nations, transit.
   static final PlateSpec unitedNationsTransit = _diplomatic('it.unt', 'UNT', 3);
@@ -201,7 +213,8 @@ abstract final class ItalyPlates {
     final bool un = prefix.startsWith('UN');
     final Color blue = un ? ItalyColors.unBlue : ItalyColors.diplomaticBlue;
     final double prefixPitch = prefix.length == 3 ? 46 : _Layout.dipPrefixPitch;
-    final double numberLeft = _Layout.dipNumberCentre - digits * _Layout.dipNumberPitch / 2;
+    final double numberLeft =
+        _Layout.dipNumberCentre - digits * _Layout.dipNumberPitch / 2;
     final double top = _Layout.dipTop, h = _Layout.dipHeight;
     return PlateSpec(
       id: id,
@@ -248,7 +261,12 @@ abstract final class ItalyPlates {
         for (int i = 0; i < prefix.length; i++)
           PlateLabel(
             text: prefix[i],
-            box: PlateBox(_Layout.dipPrefixLeft + i * prefixPitch, top, prefixPitch, h),
+            box: PlateBox(
+              _Layout.dipPrefixLeft + i * prefixPitch,
+              top,
+              prefixPitch,
+              h,
+            ),
             glyphHeight: h * _Layout.dipLabelScale,
             color: blue,
           ),
@@ -260,7 +278,12 @@ abstract final class ItalyPlates {
         ),
         PlateLabel(
           text: '·',
-          box: PlateBox(numberLeft + digits * _Layout.dipNumberPitch + 2.2, top, 14, h),
+          box: PlateBox(
+            numberLeft + digits * _Layout.dipNumberPitch + 2.2,
+            top,
+            14,
+            h,
+          ),
           glyphHeight: h * _Layout.dipLabelScale,
           color: ItalyColors.black,
         ),
@@ -329,7 +352,12 @@ abstract final class ItalyPlates {
           bottomCornerRadius: ring / 2,
         ),
         PlateBand(
-          box: PlateBox(d.ringCx - inner / 2, d.ringCy - inner / 2, inner, inner),
+          box: PlateBox(
+            d.ringCx - inner / 2,
+            d.ringCy - inner / 2,
+            inner,
+            inner,
+          ),
           color: ItalyColors.euroBlue,
           topCornerRadius: inner / 2,
           bottomCornerRadius: inner / 2,

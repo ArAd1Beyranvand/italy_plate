@@ -8,7 +8,10 @@ void main() {
 
   test('spec refuses code HL', () {
     expect(spec.restrictions, contains(ItalyMissions.restriction));
-    expect(spec.restrictionViolatedBy(<String?>['0213', 'HL'])?.reason, notFound);
+    expect(
+      spec.restrictionViolatedBy(<String?>['0213', 'HL'])?.reason,
+      notFound,
+    );
     expect(spec.restrictionViolatedBy(<String?>['0213', 'XG']), isNull);
     expect(
       () => spec.checkRestrictions(<String?>['0213', 'HL']),
@@ -38,7 +41,17 @@ void main() {
 
   test('validator', () {
     const v = ItalyDiplomaticValidator();
-    expect(v.validate(PlateEntry(spec: spec, values: <String?>['0213', 'XG'])).isValid, isTrue);
-    expect(v.validate(PlateEntry(spec: spec, values: <String?>['021', 'XG'])).isValid, isFalse);
+    expect(
+      v
+          .validate(PlateEntry(spec: spec, values: <String?>['0213', 'XG']))
+          .isValid,
+      isTrue,
+    );
+    expect(
+      v
+          .validate(PlateEntry(spec: spec, values: <String?>['021', 'XG']))
+          .isValid,
+      isFalse,
+    );
   });
 }

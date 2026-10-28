@@ -9,9 +9,12 @@ class ItalyValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'number';
 
-  static const String reasonPrefix = 'The prefix is two letters (no I, O, Q, U).';
-  static const String reasonNumber = 'The number is three digits, or five on a motorcycle.';
-  static const String reasonSuffix = 'The suffix is two letters (no I, O, Q, U).';
+  static const String reasonPrefix =
+      'The prefix is two letters (no I, O, Q, U).';
+  static const String reasonNumber =
+      'The number is three digits, or five on a motorcycle.';
+  static const String reasonSuffix =
+      'The suffix is two letters (no I, O, Q, U).';
 
   static final RegExp _letters = RegExp(r'^[A-HJ-NP-TV-Z]{2}$');
 
