@@ -18,7 +18,6 @@ abstract final class ItalyThemes {
 PlateTheme _framed(double border, double radius) => PlateTheme.monochrome(
   field: ItalyColors.white,
   ink: ItalyColors.black,
-  inactive: ItalyColors.inactive,
   borderWidthRatio: border,
   plateRadiusRatio: radius,
 );

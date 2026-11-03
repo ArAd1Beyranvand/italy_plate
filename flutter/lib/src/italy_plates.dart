@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart' show Color, EdgeInsets;
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -238,22 +236,21 @@ abstract final class ItalyPlates {
         ),
       ],
       slots: <PlateSlot>[
-        PlateSlot(
-          alphabet: ItalyAlphabets.digits,
-          box: PlateBox(numberLeft, top, digits * _Layout.dipNumberPitch, h),
-          length: digits,
-          spacing: max(0, _Layout.dipNumberPitch - 0.6 * 0.72 * h),
+        plateRun(
+          ItalyAlphabets.digits,
+          digits,
+          left: numberLeft,
+          top: top,
+          pitch: _Layout.dipNumberPitch,
+          height: h,
         ),
-        PlateSlot(
-          alphabet: PlateAlphabet.latinUppercase,
-          box: PlateBox(
-            _Layout.dipCodeCentre - _Layout.dipCodePitch,
-            top,
-            2 * _Layout.dipCodePitch,
-            h,
-          ),
-          length: 2,
-          spacing: max(0, _Layout.dipCodePitch - 0.6 * 0.72 * h),
+        plateRun(
+          PlateAlphabet.latinUppercase,
+          2,
+          left: _Layout.dipCodeCentre - _Layout.dipCodePitch,
+          top: top,
+          pitch: _Layout.dipCodePitch,
+          height: h,
           color: blue,
         ),
       ],
@@ -312,15 +309,16 @@ abstract final class ItalyPlates {
     final double ring = d.ringDiameter;
     final double inner = ring * (1 - 2 * _Layout.ringStroke);
     final List<PlateSlot> slots = <PlateSlot>[];
-    final List<PlateTextGroup> groups = <PlateTextGroup>[];
     for (final _Run r in d.runs) {
-      groups.add(PlateTextGroup(<int>[slots.length], key: r.key));
       slots.add(
-        PlateSlot(
-          alphabet: r.alphabet,
-          box: PlateBox(r.cx - r.pitch / 2, r.top, r.count * r.pitch, r.height),
-          length: r.count,
-          spacing: max(0, r.pitch - 0.6 * 0.72 * r.height),
+        plateRun(
+          r.alphabet,
+          r.count,
+          left: r.cx - r.pitch / 2,
+          top: r.top,
+          pitch: r.pitch,
+          height: r.height,
+          group: r.key,
         ),
       );
     }
@@ -346,18 +344,13 @@ abstract final class ItalyPlates {
             ]),
       bands: <PlateBand>[
         PlateBand(
-          box: PlateBox(d.ringCx - ring / 2, d.ringCy - ring / 2, ring, ring),
+          box: PlateBox.centered(d.ringCx, d.ringCy, ring, ring),
           color: ItalyColors.ringYellow,
           topCornerRadius: ring / 2,
           bottomCornerRadius: ring / 2,
         ),
         PlateBand(
-          box: PlateBox(
-            d.ringCx - inner / 2,
-            d.ringCy - inner / 2,
-            inner,
-            inner,
-          ),
+          box: PlateBox.centered(d.ringCx, d.ringCy, inner, inner),
           color: ItalyColors.euroBlue,
           topCornerRadius: inner / 2,
           bottomCornerRadius: inner / 2,
@@ -377,7 +370,6 @@ abstract final class ItalyPlates {
           color: ItalyColors.white,
         ),
       ],
-      textGroups: groups,
     );
   }
 }

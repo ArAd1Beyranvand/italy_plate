@@ -1,16 +1,10 @@
 import 'package:plate_core/plate_core.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges an Italian plate: two letters, three digits and two letters on a car
 /// (`AA 000 AA`), or two letters and five digits on a motorcycle. The letters
 /// leave out I, O, Q and U. Reports, never bars a keystroke.
 class ItalyValidator extends GatedPlateValidator {
-  const ItalyValidator();
-
-  @override
-  String get gateGroup => 'number';
+  const ItalyValidator() : super('number');
 
   static const String reasonPrefix =
       'The prefix is two letters (no I, O, Q, U).';
@@ -19,9 +13,6 @@ class ItalyValidator extends GatedPlateValidator {
   static const String reasonSuffix =
       'The suffix is two letters (no I, O, Q, U).';
 
-  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
-  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
-  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _letters = RegExp(r'^[A-HJ-NP-TV-Z]{2}$');
 
   @override
@@ -29,8 +20,7 @@ class ItalyValidator extends GatedPlateValidator {
     if (!_letters.hasMatch(entry.group('prefix'))) {
       return const PlateValidation.invalid(reasonPrefix);
     }
-    final String suffix = entry.group('suffix');
-    final String number = entry.group('number');
+    final String suffix = entry.group('suffix'), number = entry.group('number');
     if (!isDigitsOfLength(number, suffix.isEmpty ? 5 : 3)) {
       return const PlateValidation.invalid(reasonNumber);
     }
@@ -46,21 +36,16 @@ class ItalyValidator extends GatedPlateValidator {
 /// `UNT`). `Q` and `V` are not used on consular plates. Reports, never bars a
 /// keystroke, except for the spec's restrictions.
 class ItalyDiplomaticValidator extends GatedPlateValidator {
-  const ItalyDiplomaticValidator({this.digits = 4, this.consular = false});
+  const ItalyDiplomaticValidator({this.digits = 4, this.consular = false})
+    : super('number');
 
   final int digits;
   final bool consular;
-
-  @override
-  String get gateGroup => 'number';
 
   static const String reasonNumber = 'The number is three or four digits.';
   static const String reasonCode = 'The country code is two letters.';
   static const String reasonConsular = 'Consular codes leave out Q and V.';
 
-  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
-  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
-  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _code = RegExp(r'^[A-Z]{2}$');
 
   @override

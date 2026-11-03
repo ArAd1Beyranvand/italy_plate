@@ -9,5 +9,4 @@ abstract final class ItalyColors {
   static const Color ringYellow = Color(0xFFFFCC00);
   static const Color diplomaticBlue = Color(0xFF1156B6);
   static const Color unBlue = Color(0xFF2A99C6);
-  static const Color inactive = Color(0xFFB0B0B0);
 }

@@ -6,12 +6,8 @@ import 'italy_colors.dart';
 /// The `I` beneath them is a [PlateLabel] on
 /// the spec, so [captionLines] is empty.
 abstract final class ItalyCountry {
-  static const PlateCountry italy = PlateCountry(
+  static const PlateCountry italy = PlateCountry.euroband(
     code: 'it',
-    captionLines: <String>[],
     panelColor: ItalyColors.euroBlue,
-    panelTextColor: ItalyColors.white,
-    flagAspectRatio: 46 / 70.4,
-    flag: EuropeanStars.band,
   );
 }
